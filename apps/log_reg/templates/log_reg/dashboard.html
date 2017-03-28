@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dashboard</title>
+</head>
+<body>
+
+	<a href="/logout">Logout</a>
+	<a href="/wish_items/create">Add Item</a>
+	<h4>Welcome, {{request.session.user }}!</h4>
+
+	<h2>Your Wishlist</h2>
+	<table>
+		<tr>
+			<th>Item</th>
+			<th>Created By</th>
+			<th>Created at</th>
+			<th>Action</th>
+		</tr>
+		<tr>
+			{% for wish in my_wishes %}
+			<td><a href="/wish_items/{{wish.id}}">{{wish.item}}</a></td>
+			<td>{{wish.creator.first_name}}</td>
+			<td>{{wish.created_at}}</td>
+			{% if wish.creator.id == request.session.user_id %}
+				<td><a href="/wish_items/delete/{{wish.id}}"><button>Delete item</button></a></td>
+			{% else %}
+				<td><a href="/wish_items/remove/{{wish.id}}"><button>Remove item</button></a></td>
+			{% endif %}
+		</tr>
+			{% endfor %}
+	</table>
+
+	<br><br>
+
+	<h2>Other Wishists</h2>
+	<table>
+		<tr>
+			<th>Item</th>
+			<th>Created By</th>
+			<th>Created at</th>
+			<th>Action</th>
+		</tr>
+		<tr>
+			{% for wish in other_wishes %}
+			<td><a href="/wish_items/{{wish.id}}">{{wish.item}}</a></td>
+			<td>{{wish.creator.first_name}}</td>
+			<td>{{wish.created_at}}</td>
+			<td><a href="/wish_items/repeatprocess/{{wish.id}}"><button>Add to my wishlist</button></a></td>
+		</tr>
+			{% endfor %}
+	</table>
+	<br>
+	<br>
+	<br>
+	<br>
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a new wishlist item</title>
+</head>
+<body>
+	<a href="/dashboard">Home</a>
+	<a href="/logout">Logout</a>
+	<h1>Create a new wishlist item:</h1>
+	{% for message in messages %}
+		<ul>
+			<li>{{ message }}</li>
+		</ul>
+	{% endfor %}
+	<br><br>
+	<form action='/wish_items/process' method='POST'>
+	{% csrf_token %}
+		Item/Product:
+		<input type='text' name='item' id='item'>
+		<input id="submit" type='submit' value='Submit'>
+	</form>
+	
+</body>
+</html>
